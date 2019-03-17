@@ -7,5 +7,12 @@
         "user": "root",
         "password": "root",
         "socketPath": "/Applications/MAMP/tmp/mysql/mysql.sock"
+    },
+    "errors" : {
+        "wrongID": "Wrong id",
+        "wrongMaxValue": "Wrong max value",
+        "nameAlreadyTaken": "Name already taken",
+        "noNameValue": "No name value",
+        "sameName": "Same name"
     }
 }

@@ -1,5 +1,5 @@
 {
-  "name": "youcoast",
+  "name": "front",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -7,20 +7,14 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Dumpinator/youcoast.git"
-  },
+  "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Dumpinator/youcoast/issues"
-  },
-  "homepage": "https://github.com/Dumpinator/youcoast#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
-    "promise-mysql": "^3.3.1"
+    "twig": "^1.13.2"
   },
   "devDependencies": {
     "morgan": "^1.9.1"
