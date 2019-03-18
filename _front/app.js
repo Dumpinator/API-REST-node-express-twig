@@ -9,7 +9,7 @@ const axios = require('axios')
 
 // Variables globales
 const app = express()
-const port = 3001
+const port = process.env.PORT || 3001
 const fetch = axios.create({
     baseURL: 'http://localhost:3000/api/v1'
   });
@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
     res.redirect('/members')
 })
 
-// Page pour tous les membres
+// Page accueil
 app.get('/members', (req, res) => {
     apiCall( req.query.max ? '/members?max='+req.query.max : '/members', 'get', {}, res, (result) => {
         res.render('members.twig', {
@@ -79,7 +79,7 @@ app.post('/insert', (req, res) => {
 })
 
 // App started
-app.listen(port, () => console.log('Started on port '+ port))
+app.listen(port, () => console.log('App running on port '+ port))
 
 // Function
 function renderError (res, errMsg) {

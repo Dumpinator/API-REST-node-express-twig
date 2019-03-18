@@ -8,6 +8,13 @@
         "password": "root",
         "socketPath": "/Applications/MAMP/tmp/mysql/mysql.sock"
     },
+    "db2": {
+        "host": "cleardb-defined-63480",
+        "database": "heroku_a9e784b5d03ec6e",
+        "user": "root",
+        "password": "root",
+        "socketPath": "/Applications/MAMP/tmp/mysql/mysql.sock"
+    },
     "errors" : {
         "wrongID": "Wrong id",
         "wrongMaxValue": "Wrong max value",

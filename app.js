@@ -63,8 +63,8 @@ mysql.createConnection({
 
         app.use(`${config.rootAPI}members`, MembersRouter)
 
-        app.listen(config.port, () => {
-            console.log(`Server started on port ${config.port}`)
+        app.listen( process.env.PORT || config.port, () => {
+            console.log(`Express server started on port ${config.port}`)
         })
     
 }).catch((err) =>{
