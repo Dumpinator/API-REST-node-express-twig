@@ -19,18 +19,15 @@ app.use(morgan)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-//console.log(__dirname);
-
 
 // Routes
 app.get('/', (req, res) => {
-    res.render('index.twig', {
-    })
+    res.redirect('/members')
 })
 
 // Page pour tous les membres
 app.get('/members', (req, res) => {
-    apiCall( req.query.max ? '/members?max='+req.query.max : '/members', res, (result) => {
+    apiCall( req.query.max ? '/members?max='+req.query.max : '/members', 'get', {}, res, (result) => {
         res.render('members.twig', {
             members: result
         })
@@ -39,23 +36,47 @@ app.get('/members', (req, res) => {
 
 // page pour un membre + id
 app.get('/members/:id', (req, res) => {
-    apiCall('/members/'+req.params.id, res, (result) => {
+    apiCall('/members/'+req.params.id, 'get', {}, res, (result) => {
         res.render('member.twig', {
             member: result
         })
     })
 })
 
-// modification pour un membre + id
+
+// UPDATE & DELETE ///////////////////////
+// page
 app.get('/edit/:id', (req, res) => {
-    apiCall('/members/'+req.params.id, res, (result) => {
+    apiCall('/members/'+req.params.id, 'get', {}, res, (result) => {
         res.render('editMember.twig', {
             member: result
         })
     })
 })
+// méthode post pour edit
+app.post('/edit/:id', (req, res) => {
+    apiCall('/members/'+req.params.id, 'put', { name: req.body.name }, res, () => {
+        res.redirect('/members')
+    })
+})
+// méthode post pour delete
+app.post('/delete', (req, res) => {
+    apiCall('/members/'+req.body.id, 'delete', {}, res, () => {
+        res.redirect('/members')
+    })
+})
 
+// INSERT  ///////////////////////
+// page
+app.get('/insert', (req, res) => {
+    res.render('insertMember.twig')
+})
 
+app.post('/insert', (req, res) => {
+    apiCall('/members', 'post', { name: req.body.name }, res, () => {
+        res.redirect('/members')
+    })
+})
 
 // App started
 app.listen(port, () => console.log('Started on port '+ port))
@@ -67,15 +88,18 @@ function renderError (res, errMsg) {
     })
 }
 
-function apiCall(url, res, next) {
-    fetch.get(url)
-        .then((response) => {
+function apiCall(url, method, data, res, next) {
+    fetch({
+        method: method,
+        url: url,
+        data: data
+    }).then((response) => {
             
-            if (response.data.status == 'success') {
-                next(response.data.result)
-            } else {
-                renderError(res, response.data.message)
-            }
-        })
-        .catch((err) => renderError(res, err.message))
+        if (response.data.status == 'success') {
+            next(response.data.result)
+        } else {
+            renderError(res, response.data.message)
+        }
+    })
+    .catch((err) => renderError(res, err.message))
 }

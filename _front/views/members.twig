@@ -12,7 +12,7 @@
   </head>
   <body class="p-3">
 
-    <h1 class="mb-5 text-center">Tous les membres</h1>
+    <h1 class="mb-5 text-center">Membres : {{ members.length }}</h1>
 
     <table class="table table-striped">
     <thead>
@@ -24,7 +24,7 @@
     </thead>
     <tbody>
         {% for member in members %}
-            <tr>
+            <tr  style="cursor: pointer" onclick="document.location='/edit/{{ member.id }}'">
                 {% for value in member %}
                     <td>{{ value }}</td>
                 {% endfor %}
@@ -32,6 +32,8 @@
         {% endfor %}
     </tbody>
     </table>
+
+    <a href="/insert" class="btn btn-primary mt-3">Ajouter un membre</a>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

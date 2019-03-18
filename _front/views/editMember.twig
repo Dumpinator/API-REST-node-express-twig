@@ -11,16 +11,25 @@
     <title>Modification</title>
   </head>
   <body class="p-3">
-    <h1 class="mb-5 text-center">Modification de : {{ member.name }}</h1>
-    <form>
+    <h1 class="mb-5 text-center">Modification de {{ member.name }}</h1>
+    <div class="text-center"><a href="/" class="btn btn-primary mt-3 ">Acceuil</a></div>
+    
+    <form action="" method="post">
       {% for index, value in member %}    
         <div class="form-group">
           <label for="{{ index }}">{{ index }}</label>
-          <input type="text" class="form-control" id="{{ index }}" name="{{ index }}" value="{{ value }}">
+          <input type="text" class="form-control" id="{{ index }}" name="{{ index }}" value="{{ value }}" {% if index == 'id' %} readonly {% endif %}>
         </div>
       {% endfor %}
-    <button type="submit" class="btn btn-primary">Modifier</button>
+      <button type="submit" class="btn btn-primary">Modifier</button>
     </form>
+
+    <form action="/delete" method="post" class="form-row mt-5">
+      <input type="hidden" name="id" value="{{ member.id }}">
+      <button type="submit" class="btn btn-danger">Supprimer</button>
+    </form>
+
+   
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

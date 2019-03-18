@@ -18,10 +18,8 @@ mysql.createConnection({
     console.log('Connected to mysql database : nodejs ')
 
         const app = express()
-        let Members =require('./assets/classes/members-class')(db, config)
-        console.log(Members)
+        let Members = require('./assets/classes/members-class')(db, config)
         
-
         app.use(morgan('dev'))
         app.use(bodyParser.json())
         app.use(bodyParser.urlencoded({ extended: true }))
